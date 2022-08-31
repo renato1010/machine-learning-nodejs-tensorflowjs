@@ -4,12 +4,7 @@ import {
   type Tensor,
   type Rank,
 } from "@tensorflow/tfjs-node-gpu";
-import {
-  maxFeature,
-  maxLabel,
-  minFeature,
-  minLabel,
-} from "../housesalesdataset";
+import { createFeatures } from "./create-features";
 import { deNormalize, normalize } from "./normalise";
 
 async function predictHousePrice(houseArea: number): Promise<number> {
@@ -17,8 +12,9 @@ async function predictHousePrice(houseArea: number): Promise<number> {
     throw new Error("House are must be a number value");
   }
   const inputTensor = tensor1d([houseArea]);
-  // inputTensor.print();
-  console.log({ minFeature, maxFeature });
+  let { minFeature, maxFeature, minLabel, maxLabel } = await createFeatures();
+  minFeature.print();
+  maxFeature.print();
   const { tensor: inputTensorNormalized } = normalize(
     inputTensor,
     minFeature,
