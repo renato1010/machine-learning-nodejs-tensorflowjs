@@ -33,7 +33,7 @@ const getDataSet = async () => {
       throw new Error("No testing dataset available");
     }
     const lossTensor = model.evaluate(testingFeature, testingLabel);
-    const loss = await (lossTensor as Scalar).dataSync();
+    const loss = (lossTensor as Scalar).dataSync();
     console.log(`Testing set loss: ${loss}`);
     // save model
     const saveResults = await model.save(
