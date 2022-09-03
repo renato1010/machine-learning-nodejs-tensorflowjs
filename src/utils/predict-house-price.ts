@@ -13,8 +13,6 @@ async function predictHousePrice(houseArea: number): Promise<number> {
   }
   const inputTensor = tensor1d([houseArea]);
   let { minFeature, maxFeature, minLabel, maxLabel } = await createFeatures();
-  minFeature.print();
-  maxFeature.print();
   const { tensor: inputTensorNormalized } = normalize(
     inputTensor,
     minFeature,
@@ -33,17 +31,11 @@ async function predictHousePrice(houseArea: number): Promise<number> {
     maxLabel
   );
   const outputValue = outputTensor.dataSync()[0];
-  console.log({ outputValue });
   if (!outputValue) {
     throw new Error("Error getting predicted price");
   }
   const roundedOutput = +(outputValue / 1000).toFixed(0) * 1000;
   return roundedOutput;
 }
-
-(async () => {
-  const price1 = await predictHousePrice(2000);
-  console.log({ price1 });
-})();
 
 export { predictHousePrice };
