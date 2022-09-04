@@ -7,7 +7,6 @@ const createServer = (): Application => {
 
   app.use(urlencoded({ extended: true }));
   app.use(json());
-
   app.disable("x-powered-by");
   app.get("/health", (_req, res) => res.send("UP"));
   app.use("/prediction/house-price-by-squareft", housePriceRouter);
