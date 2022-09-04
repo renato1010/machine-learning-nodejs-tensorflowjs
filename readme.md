@@ -40,8 +40,8 @@ So doing everything in node will look like:
 const houseSalesDataset = data.csv("file://data/kc_house_data.csv");
 ```
 
-- Our problem will be: given a house living area square feet liven we will predict the price
-  so we will get only two columns of data set:
+- Our problem will be: given the living area of a house in square feet, we will predict the price of that house,  
+so we will get only two columns of the dataset:
 
 ```typescript
 const pointsDataset = await houseSalesDataset.map((record) => ({
